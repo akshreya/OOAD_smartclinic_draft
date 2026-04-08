@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Doctor</title>
+
+    <style>
+        body { margin:0; font-family:Arial; background:linear-gradient(to right,#fce4ec,#e3f2fd); }
+
+        .navbar { background:linear-gradient(to right,#f48fb1,#90caf9); padding:15px; display:flex; justify-content:space-between; }
+        .logo { color:white; font-weight:bold; }
+        .nav-links a { color:white; margin-left:15px; text-decoration:none; }
+
+        .container {
+            width:400px;
+            margin:40px auto;
+            background:white;
+            padding:25px;
+            border-radius:12px;
+        }
+
+        input { width:100%; padding:8px; margin:8px 0; }
+        button { width:100%; padding:10px; background:#f06292; color:white; border:none; }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">Smart Clinic</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/doctors">Doctors</a>
+        <a href="/patients">Patients</a>
+        <a href="/appointments">Appointments</a>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Add Doctor</h2>
+
+    <form th:action="@{/doctors}" th:object="${doctor}" method="post">
+        <input type="text" th:field="*{name}" placeholder="Name">
+        <input type="text" th:field="*{specialization}" placeholder="Specialization">
+        <input type="text" th:field="*{email}" placeholder="Email">
+        <input type="text" th:field="*{phone}" placeholder="Phone">
+        <input type="text" th:field="*{availableDays}" placeholder="Days">
+        <button type="submit">Save</button>
+    </form>
+
+</div>
+</body>
+</html>

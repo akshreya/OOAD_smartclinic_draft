@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #fce4ec, #e3f2fd);
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background: linear-gradient(to right, #f48fb1, #90caf9);
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 430px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            border-top: 6px solid #f48fb1;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        h2 {
+            text-align: center;
+            color: #d81b60;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background: linear-gradient(to right, #f06292, #ec407a);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            text-decoration: none;
+            color: #d81b60;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">Smart Clinic</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/doctors">Doctors</a>
+        <a href="/patients">Patients</a>
+        <a href="/appointments">Appointments</a>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Edit Appointment</h2>
+
+    <form th:action="@{/appointments/update/{id}(id=${appointment.id})}" th:object="${appointment}" method="post">
+        <label>Appointment Date</label>
+        <input type="date" th:field="*{appointmentDate}">
+
+        <label>Status</label>
+        <select th:field="*{status}">
+            <option value="Scheduled">Scheduled</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+        </select>
+
+        <label>Select Doctor</label>
+        <select th:field="*{doctor}">
+            <option th:each="doctor : ${doctors}"
+                    th:value="${doctor.id}"
+                    th:text="${doctor.name}"></option>
+        </select>
+
+        <label>Select Patient</label>
+        <select th:field="*{patient}">
+            <option th:each="patient : ${patients}"
+                    th:value="${patient.id}"
+                    th:text="${patient.name}"></option>
+        </select>
+
+        <button type="submit">Update Appointment</button>
+    </form>
+
+    <a class="link" href="/appointments">Back to Appointments</a>
+</div>
+
+</body>
+</html>

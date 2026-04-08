@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointments</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #fce4ec, #e1f5fe);
+        }
+
+        .navbar {
+            background: linear-gradient(to right, #f48fb1, #90caf9);
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            border-top: 6px solid #f48fb1;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        h2 {
+            text-align: center;
+            color: #d81b60;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f48fb1;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:nth-child(even) {
+            background: #fff0f5;
+        }
+
+        .btn-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 18px;
+            background: linear-gradient(to right, #f06292, #ec407a);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 8px 12px;
+            text-decoration: none;
+            color: white;
+            border-radius: 6px;
+            font-size: 14px;
+            margin: 2px;
+            display: inline-block;
+        }
+
+        .edit-btn {
+            background: #42a5f5;
+        }
+
+        .delete-btn {
+            background: #ef5350;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">Smart Clinic</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/doctors">Doctors</a>
+        <a href="/patients">Patients</a>
+        <a href="/appointments">Appointments</a>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Appointments List</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Doctor</th>
+            <th>Patient</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.id}"></td>
+            <td th:text="${appointment.appointmentDate}"></td>
+            <td th:text="${appointment.status}"></td>
+            <td th:text="${appointment.doctor != null ? appointment.doctor.name : 'N/A'}"></td>
+            <td th:text="${appointment.patient != null ? appointment.patient.name : 'N/A'}"></td>
+            <td>
+                <a class="edit-btn" th:href="@{/appointments/edit/{id}(id=${appointment.id})}">Edit</a>
+                <a class="delete-btn" th:href="@{/appointments/delete/{id}(id=${appointment.id})}"
+                   onclick="return confirm('Delete this appointment?')">Delete</a>
+            </td>
+        </tr>
+    </table>
+
+    <a class="btn-link" href="/appointments/new">+ Add New Appointment</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+Index: src/main/resources/templates/view-patients.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/templates/view-patients.html b/src/main/resources/templates/view-patients.html
+new file mode 100644
+--- /dev/null
++++ b/src/main/resources/templates/view-patients.html
+@@ -0,0 +1,41 @@
++<!DOCTYPE html>
++<html xmlns:th="http://www.thymeleaf.org">
++<head>
++    <title>Patients</title>
++
++    <style>
++        body { margin:0; font-family:Arial; background:#e1f5fe; }
++
++        .navbar { background:#90caf9; padding:15px; display:flex; justify-content:space-between; }
++        .nav-links a { color:white; margin-left:15px; text-decoration:none; }
++
++        table { width:90%; margin:30px auto; background:white; border-collapse:collapse; }
++        th, td { padding:10px; border:1px solid #ccc; text-align:center; }
++    </style>
++</head>
++
++<body>
++
++<div class="navbar">
++    <div>Smart Clinic</div>
++    <div class="nav-links">
++        <a href="/">Home</a>
++        <a href="/patients">Patients</a>
++    </div>
++</div>
++
++<table>
++    <tr>
++        <th>ID</th><th>Name</th><th>Age</th>
++    </tr>
++
++    <tr th:each="p : ${patients}">
++        <td th:text="${p.id}"></td>
++        <td th:text="${p.name}"></td>
++        <td th:text="${p.age}"></td>
++    </tr>
++
++</table>
++
++</body>
++</html>
+\ No newline at end of file

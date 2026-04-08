@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Patient</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #fce4ec, #e3f2fd);
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background: linear-gradient(to right, #f48fb1, #90caf9);
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 420px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            border-top: 6px solid #f48fb1;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        h2 {
+            text-align: center;
+            color: #d81b60;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background: linear-gradient(to right, #f06292, #ec407a);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            text-decoration: none;
+            color: #d81b60;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">Smart Clinic</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/doctors">Doctors</a>
+        <a href="/patients">Patients</a>
+        <a href="/appointments">Appointments</a>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Add Patient</h2>
+
+    <form th:action="@{/patients}" th:object="${patient}" method="post">
+        <label>Name</label>
+        <input type="text" th:field="*{name}" placeholder="Enter patient name">
+
+        <label>Age</label>
+        <input type="number" th:field="*{age}" placeholder="Enter age">
+
+        <label>Gender</label>
+        <select th:field="*{gender}">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>Phone</label>
+        <input type="text" th:field="*{phone}" placeholder="Enter phone number">
+
+        <label>Email</label>
+        <input type="text" th:field="*{email}" placeholder="Enter email">
+
+        <button type="submit">Save Patient</button>
+    </form>
+
+    <a class="link" href="/patients">View All Patients</a>
+</div>
+
+</body>
+</html>
